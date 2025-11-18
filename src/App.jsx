@@ -1,73 +1,67 @@
+import Hero from './components/Hero'
+import HowItWorks from './components/HowItWorks'
+import Features from './components/Features'
+import Roles from './components/Roles'
+import DemoSlider from './components/DemoSlider'
+import SocialProof from './components/SocialProof'
+import EmailCapture from './components/EmailCapture'
+import FAQ from './components/FAQ'
+import Footer from './components/Footer'
+
 function App() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-      {/* Subtle pattern overlay */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.05),transparent_50%)]"></div>
+    <div className="min-h-screen bg-[#FFFDFB] text-[#181818]">
+      {/* SEO metadata for this SPA route */}
+      <HelmetMeta />
 
-      <div className="relative min-h-screen flex items-center justify-center p-8">
-        <div className="max-w-2xl w-full">
-          {/* Header with Flames icon */}
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center justify-center mb-6">
-              <img
-                src="/flame-icon.svg"
-                alt="Flames"
-                className="w-24 h-24 drop-shadow-[0_0_25px_rgba(59,130,246,0.5)]"
-              />
-            </div>
+      {/* Sticky mobile CTA bar */}
+      <div className="fixed inset-x-0 bottom-0 z-40 block sm:hidden">
+        <a href="#waitlist" className="mx-3 mb-3 flex items-center justify-center rounded-2xl bg-[#FF4F00] py-3 text-white shadow-xl">
+          <span className="font-semibold">Find Watch Parties Near You →</span>
+        </a>
+      </div>
 
-            <h1 className="text-5xl font-bold text-white mb-4 tracking-tight">
-              Flames Blue
-            </h1>
-
-            <p className="text-xl text-blue-200 mb-6">
-              Build applications through conversation
-            </p>
-          </div>
-
-          {/* Instructions */}
-          <div className="bg-slate-800/50 backdrop-blur-sm border border-blue-500/20 rounded-2xl p-8 shadow-xl mb-6">
-            <div className="flex items-start gap-4 mb-6">
-              <div className="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-lg flex items-center justify-center font-bold">
-                1
-              </div>
-              <div>
-                <h3 className="font-semibold text-white mb-1">Describe your idea</h3>
-                <p className="text-blue-200/80 text-sm">Use the chat panel on the left to tell the AI what you want to build</p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-4 mb-6">
-              <div className="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-lg flex items-center justify-center font-bold">
-                2
-              </div>
-              <div>
-                <h3 className="font-semibold text-white mb-1">Watch it build</h3>
-                <p className="text-blue-200/80 text-sm">Your app will appear in this preview as the AI generates the code</p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-4">
-              <div className="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-lg flex items-center justify-center font-bold">
-                3
-              </div>
-              <div>
-                <h3 className="font-semibold text-white mb-1">Refine and iterate</h3>
-                <p className="text-blue-200/80 text-sm">Continue the conversation to add features and make changes</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Footer */}
-          <div className="text-center">
-            <p className="text-sm text-blue-300/60">
-              No coding required • Just describe what you want
-            </p>
+      {/* Top nav placeholder with download CTA */}
+      <header className="sticky top-0 z-30 border-b border-[#181818]/10 bg-[#FFFDFB]/70 backdrop-blur">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+          <div className="text-xl font-extrabold" style={{fontFamily:'DM Sans, Inter, system-ui'}}>Junto</div>
+          <div className="hidden items-center gap-3 sm:flex">
+            <a href="#how" className="rounded-xl px-3 py-2 text-sm text-[#181818]/80 hover:bg-[#181818]/5">See How It Works</a>
+            <a href="#waitlist" className="rounded-xl bg-[#FF4F00] px-4 py-2 text-sm font-semibold text-white">Join Waitlist</a>
           </div>
         </div>
-      </div>
+      </header>
+
+      <main>
+        <Hero />
+        <div id="how"><HowItWorks /></div>
+        <Features />
+        <Roles />
+        <DemoSlider />
+        <SocialProof />
+        <EmailCapture />
+        <FAQ />
+      </main>
+
+      <Footer />
     </div>
   )
+}
+
+function HelmetMeta(){
+  // Using vanilla DOM to set SEO tags since this is a SPA
+  const title = 'Junto — Discover Local Sports Watch Parties';
+  const desc = 'Join sports fans near you, find watch parties, get QR tickets, and build your community with Junto.';
+  if (typeof document !== 'undefined'){
+    document.title = title;
+    const metaDesc = document.querySelector('meta[name="description"]') || Object.assign(document.createElement('meta'), { name: 'description' });
+    metaDesc.setAttribute('content', desc);
+    if (!metaDesc.parentNode) document.head.appendChild(metaDesc);
+    const metaKeywords = document.querySelector('meta[name="keywords"]') || Object.assign(document.createElement('meta'), { name: 'keywords' });
+    metaKeywords.setAttribute('content', 'sports watch parties app, watch party finder, local sports bar events, find sports fans near me, sports communities app');
+    if (!metaKeywords.parentNode) document.head.appendChild(metaKeywords);
+  }
+  return null;
 }
 
 export default App
